@@ -19,8 +19,10 @@ mongoose.connect('mongodb://localhost:27017/agendamento', {
     useUnifiedTopology: true
 });
 
+mongoose.set('useFindAndModify', false)
+
 app.get('/', (req, res) => {
-   res.send("Oi"); 
+    res.render('index');
 })
 
 app.get('/cadastro', (req, res) => {
@@ -41,6 +43,26 @@ app.post('/cadastro', (req, res) => {
         console.log(error);
         res.redirect('/cadastro');
     })
+})
+
+app.get('/calendar', async (req, res) => {
+    let consulta = await appointmentService.getAll(false);
+
+    res.json(consulta);
+})
+
+app.get('/event/:id', async (req, res) => {
+    var appointment = await appointmentService.getById(req.params.id);
+
+    res.render('event', {appointment: appointment});
+})
+
+app.post('/finish', async (req, res) => {
+    let id = req.body.id;
+
+    let result = await appointmentService.finish(id);
+
+    res.redirect('/');
 })
 
 app.listen(8080, () => {

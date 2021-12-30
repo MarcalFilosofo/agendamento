@@ -1,0 +1,14 @@
+<h1>Consulta: <%= appointment.description  %></h1>
+<hr>
+<h4>Paciente: <%= appointment.name  %></h4></h4>
+<hr>
+<h4>E-mail: <%= appointment.email  %></h4></h4>
+<hr>
+<h4>CPF: </h4>
+<hr>
+<% if(!appointment.finished) { %>
+    <form action="/finish" method="post">
+        <input type="hidden" name="id" value="<%= appointment._id %>" />
+        <button>Finalizar Consulta</button>
+    </form>
+<% } %>
