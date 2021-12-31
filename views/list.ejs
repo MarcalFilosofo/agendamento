@@ -1,0 +1,16 @@
+<h3>Consultas: </h3>
+
+<hr>
+
+<form action="/search">
+    <input type="text" name="search" id="search" placeholder="Search">
+    <button>Pesquisar</button>
+</form>
+
+<% appos.foreach(appo => { $>
+    <%= appo.name %>
+    <%= appo.email %>
+    <%= appo.cpf %>
+    <%= appo.description %>
+
+<% }) %>

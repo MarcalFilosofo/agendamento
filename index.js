@@ -65,6 +65,21 @@ app.post('/finish', async (req, res) => {
     res.redirect('/');
 })
 
+app.get('/list', async (req, res) => {
+    let appos = await appointmentService.getAll(true);
+
+    res.render('list', {appos: appos});
+})
+
+app.get('/search', async (req, res) => {
+    let appos = await appointmentService.search(req.query.query);
+
+    res.render('list', {appos: appos});
+
+})
+
+
+
 app.listen(8080, () => {
     console.log('Server is running on port 8080');
 })
